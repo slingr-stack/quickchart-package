@@ -19,14 +19,14 @@ title: QuickChart
 keywords: 
 last_updated: March 14, 2023
 tags: []
-summary: "Detailed description of QuickChart endpoint."
+summary: "Detailed description of QuickChart package."
 ---
 
 # Overview
 
 [QuickChart](https://quickchart.io/) creates embeddable chart and qr images with a single URL. Chart images are defined by [Chart.js](https://www.chartjs.org/) objects. 
 
-The QuickChart endpoint allows to create Chart and QR codes. Some of the features supported by this endpoint are:
+The QuickChart package allows to create Chart and QR codes. Some of the features supported by this package are:
 
 - Generate an image (PNG or PDF) with the Chart
 - Generate an image (PNG or SVG) with the QR codes
@@ -41,7 +41,7 @@ It is necessary in case to use QuickChart Pro. It is not required.
 ### Generate chart image
 
 ```js
-pkg.quickchart.functions.chart(chartOptions, callbackData, callbacks);
+pkg.quickchart.api.chart(chartOptions, callbackData, callbacks);
 ```
 
 Where:
@@ -63,7 +63,7 @@ You can generate a chart images like this:
 
 ```js
 var record = sys.data.findById('company', '5ab0041fea30451201647e2b');
-pkg.quickchart.functions.chart({
+pkg.quickchart.api.chart({
         "backgroundColor": "white",
         "width": "500",
         "height": "300",
@@ -200,7 +200,7 @@ Following example generate a line chart with formatted label in axis y
 
 
     var record = sys.data.findById('company', '5e415a74c2c7e73982e328ba');
-    pkg.quickchart.functions.chart({
+    pkg.quickchart.api.chart({
             "name": "my-chart",
             "backgroundColor": "white",
             "width": "500",
@@ -235,7 +235,7 @@ Following example generate a line chart with formatted label in axis y
 ### Generate QR codes
 
 ```js
-pkg.quickchart.functions.qr(qrOptions, callbackData, callbacks);
+pkg.quickchart.api.qr(qrOptions, callbackData, callbacks);
 ```
 
 Where:
@@ -258,7 +258,7 @@ You can generate a QR code like this:
 
 ```js
 var record = sys.data.findById('company', '5ab0041fea30451201647e2b');
-pkg.quickchart.functions.qr({
+pkg.quickchart.api.qr({
     "text": record.field('description').val(),
     "dark": "f23",
     "light": "55f",
@@ -293,8 +293,9 @@ The Javascript API of the quickchart package has three pieces:
 ## HTTP requests
 You can make `POST`,`GET` requests to the [quickchart API](API_URL_HERE) like this:
 ```javascript
-var response = pkg.quickchart.functions.post('/chart')
-var response = pkg.quickchart.functions.get('/qr')
+var response = pkg.quickchart.api.post('/chart/:chartOptions', body)
+var response = pkg.quickchart.api.post('/chart/:chartOptions')
+var response = pkg.quickchart.api.get('/qr/:qrOptions')
 ```
 
 Please take a look at the documentation of the [HTTP service](https://github.com/slingr-stack/http-service)
@@ -308,20 +309,21 @@ Instead of having to use the generic HTTP methods, you can (and should) make use
 
 <br>
 
-* API URL: '/chart'
+* API URL: '/chart/:chartOptions'
 * HTTP Method: 'POST'
 ```javascript
-pkg.quickchart.functions.chart.post(chartOptions, body)
+pkg.quickchart.api.chart.post(chartOptions, body, callbackData, callbacks)
 ```
 ---
-* API URL: '/qr'
+* API URL: '/qr/:qrOptions'
 * HTTP Method: 'GET'
 ```javascript
-pkg.quickchart.functions.qr.get(qrOptions)
+pkg.quickchart.api.qr.get(qrOptions, callbackData, callbacks)
 ```
 ---
 
 </details>
+
 
 ## Flow Step
 
@@ -644,7 +646,7 @@ SLINGR is a low-code rapid application development platform that accelerates dev
 
 ## License
 
-This endpoint is licensed under the Apache License 2.0. See the `LICENSE` file for more details.
+This package is licensed under the Apache License 2.0. See the `LICENSE` file for more details.
 ## Dependencies
 * HTTP Service (Latest Version)
 
