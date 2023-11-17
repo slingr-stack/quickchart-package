@@ -1,0 +1,59 @@
+{
+    "name": "quickchart",
+    "label": "Quickchart Package",
+    "dependencies": [
+        {
+            "type": "service",
+            "name": "http",
+            "version": "v1.3.3",
+            "instanceId": "shared"
+        }
+    ],
+    "configuration": [
+        {
+            "name": "key",
+            "label": "Key",
+            "type": "text",
+            "description": "Required for QuickChart Pro.",
+            "required": false
+        },
+        {
+            "name": "QUICKCHART_API_BASE_URL",
+            "label": "Quickchart Api Url",
+            "type": "label",
+            "value": "https://api.example.com/v1"
+        }
+    ],
+    "events": [
+        {
+            "label": "Chart Response",
+            "name": "chartResponse"
+        },
+        {
+            "label": "QR Response",
+            "name": "qrResponse"
+        }
+    ],
+    "metadata": [
+        {
+            "type": "script",
+            "namespace": "api",
+            "path": "/scripts/api.js"
+        },
+        {
+            "type": "flowStep",
+            "namespace": "steps",
+            "path": "/flowSteps/apiCallQuickchart"
+        },
+        {
+            "type": "flowStep",
+            "namespace": "steps",
+            "path": "/flowSteps/generateChartQuickchart"
+        },
+        {
+            "type": "flowStep",
+            "namespace": "steps",
+            "path": "/flowSteps/generateQRQuickchart"
+        }
+    ]
+}
