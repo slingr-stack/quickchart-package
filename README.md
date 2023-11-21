@@ -183,9 +183,7 @@ Following example generate a line chart with formatted label in axis y
     config3 += "    }";
     config3 += "  }";
     config3 += "}";
-
-
-    var record = sys.data.findById('company', '5e415a74c2c7e73982e328ba');
+    
     pkg.quickchart.api.chart({
             "name": "my-chart",
             "backgroundColor": "white",
@@ -193,28 +191,6 @@ Following example generate a line chart with formatted label in axis y
             "height": "300",
             "format": "png",
             "chart": config3
-      },
-      { record: record }, 
-      {
-        'chartResponse': function(res, callbackData) {
-          var data = res.data;
-          if(data && data.status == "ok") {
-            sys.logs.info("Chart was generated");
-          } else {
-            sys.logs.error("+++ There are errors to generate file");
-          }
-          
-          if(data && data.file) {
-            var document = callbackData.record;
-            document.field('chartFile').val({
-              id: data.file.fileId,
-              name: data.file.fileName,
-              contentType: data.file.contentType
-            });
-            sys.data.save(document);
-          }
-    
-        }
       });
 ```
 
