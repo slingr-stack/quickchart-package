@@ -5,7 +5,7 @@
         {
             "type": "service",
             "name": "http",
-            "version": "v1.3.3",
+            "version": "v1.3.4",
             "instanceId": "shared"
         }
     ],
@@ -38,21 +38,21 @@
         {
             "type": "script",
             "namespace": "api",
-            "path": "/scripts/functions.js"
+            "path": "/scripts/api.js"
         },
         {
             "type": "flowStep",
-            "namespace": "steps",
+            "namespace": "apiCallQuickchart",
             "path": "/flowSteps/apiCallQuickchart"
         },
         {
             "type": "flowStep",
-            "namespace": "steps",
+            "namespace": "generateChartQuickchart",
             "path": "/flowSteps/generateChartQuickchart"
         },
         {
             "type": "flowStep",
-            "namespace": "steps",
+            "namespace": "generateQRQuickchart",
             "path": "/flowSteps/generateQRQuickchart"
         }
     ]

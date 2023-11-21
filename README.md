@@ -1,4 +1,4 @@
-<table>
+<table class="table" style="margin-top: 10px">
     <thead>
     <tr>
         <th>Title</th>
@@ -14,13 +14,6 @@
     </tr>
     </tbody>
 </table>
----
-title: QuickChart
-keywords: 
-last_updated: November 21, 2023
-tags: []
-summary: "Detailed description of QuickChart package."
----
 
 # Overview
 
