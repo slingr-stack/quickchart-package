@@ -74,10 +74,10 @@ pkg.quickchart.api.chart({
           "data": {
             "labels": [2012, 2013, 2014, 2015, 2016],
             "datasets": [{
-              "label": record.field('labelA').val(),
+              "label": "Label A",
               "data": [12, 6, 5, 18, 12]
             }, {
-              "label": record.field('labelB').val(),
+              "label": "Label B",
               "data": [4, 8, 16, 5, 5]
             }]
           }
