@@ -32,54 +32,44 @@ step.apiCallQuickchart = function (inputs) {
 		fullResponse: inputs.fullResponse || false,
 		connectionTimeout: inputs.connectionTimeout || 5000,
 		readTimeout: inputs.readTimeout || 60000,
-		url: {
-			urlValue: inputs.url.urlValue ? inputs.url.urlValue.split(" ")[1] : "",
-			paramsValue: inputs.url.paramsValue || []
+		path: inputs.path || {
+			urlValue: "",
+			paramsValue: []
 		},
-		method: inputs.url.urlValue ? inputs.url.urlValue.split(" ")[0] : ""
+		method: inputs.method || "get",
 	};
 
-	inputsLogic.headers = isObject(inputsLogic.headers) ? inputsLogic.headers : stringToObject(inputsLogic.headers);
-	inputsLogic.params = isObject(inputsLogic.params) ? inputsLogic.params : stringToObject(inputsLogic.params);
-	inputsLogic.body = isObject(inputsLogic.body) ? inputsLogic.body : JSON.parse(inputsLogic.body);
-
-
 	var options = {
-		url: config.get("QUICKCHART_API_BASE_URL") + parse(inputsLogic.url.urlValue, inputsLogic.url.paramsValue),
-		params: inputsLogic.params,
-		headers: inputsLogic.headers,
-		body: inputsLogic.body,
-		followRedirects : inputsLogic.followRedirects,
-		forceDownload :inputsLogic.download,
-		downloadSync : false,
+		path: parse(inputsLogic.path.urlValue, inputsLogic.path.paramsValue),
+		params: isObject(inputsLogic.params) ? inputsLogic.params : stringToObject(inputsLogic.params),
+		headers: isObject(inputsLogic.headers) ? inputsLogic.headers : stringToObject(inputsLogic.headers),
+		body: isObject(inputsLogic.body) ? inputsLogic.body : JSON.parse(inputsLogic.body),
+		followRedirects: inputsLogic.followRedirects,
+		forceDownload: inputsLogic.download,
+		downloadSync: false,
 		fileName: inputsLogic.fileName,
-		fullResponse : inputsLogic.fullResponse,
+		fullResponse: inputsLogic.fullResponse,
 		connectionTimeout: inputsLogic.connectionTimeout,
 		readTimeout: inputsLogic.readTimeout
-	}
+	};
+
 
 	switch (inputsLogic.method.toLowerCase()) {
 		case 'get':
-			return httpService.get(options);
+			return httpService.get(Quickchart(options));
 		case 'post':
-			return httpService.post(options);
-		case 'delete':
-			return httpService.delete(options);
+			return httpService.post(Quickchart(options));
 		case 'put':
-			return httpService.put(options);
-		case 'connect':
-			return httpService.connect(options);
-		case 'head':
-			return httpService.head(options);
-		case 'options':
-			return httpService.options(options);
+			return httpService.put(Quickchart(options));
 		case 'patch':
-			return httpService.patch(options);
-		case 'trace':
-			return httpService.trace(options);
+			return httpService.patch(Quickchart(options));
+		case 'delete':
+			return httpService.delete(Quickchart(options));
+		case 'head':
+			return httpService.head(Quickchart(options));
+		case 'options':
+			return httpService.options(Quickchart(options));
 	}
-
-	//REPLACE THIS WITH YOUR OWN CODE
 
 	return null;
 };
@@ -121,3 +111,51 @@ var stringToObject = function (obj) {
 	}
 	return null;
 };
+
+var Quickchart = function (options) {
+	options = options || {};
+	options= setApiUri(options);
+	options= setRequestHeaders(options);
+	options= config.get("key") ? setRequestBody(options) : options;
+	return options;
+}
+
+/****************************************************
+ Private API
+ ****************************************************/
+
+function setApiUri(options) {
+	var API_URL = config.get("QUICKCHART_API_BASE_URL");
+	var url = options.path || "";
+	options.url = API_URL + url;
+	sys.logs.debug('[quickchart] Set url: ' + options.path + "->" + options.url);
+	return options;
+}
+
+function setRequestHeaders(options) {
+	var headers = options.headers || {};
+	headers = mergeJSON(headers, {"Content-Type": "application/json"});
+
+	options.headers = headers;
+	return options;
+}
+
+
+function mergeJSON (json1, json2) {
+	const result = {};
+	var key;
+	for (key in json1) {
+		if(json1.hasOwnProperty(key)) result[key] = json1[key];
+	}
+	for (key in json2) {
+		if(json2.hasOwnProperty(key)) result[key] = json2[key];
+	}
+	return result;
+}
+
+function setRequestBody(options) {
+	var body = options.body || {};
+	body.key = body.key || config.get("key");
+	options.body = body;
+	return options;
+}
