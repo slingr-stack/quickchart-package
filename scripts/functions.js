@@ -41,15 +41,20 @@ exports.chart = {};
 
 exports.qr = {};
 
-exports.chart.post = function(chartOptions, httpOptions, callbackData, callbacks) {
-    if (!chartOptions) {
-        sys.logs.error('Invalid argument received. This helper should receive the following parameters as non-empty strings: [chartOptions].');
-        return;
-    }
-    var url = parse('/chart/:chartOptions', [chartOptions]);
+exports.chart.post = function(httpOptions, callbackData, callbacks) {
+    var url = parse('/chart/create');
     sys.logs.debug('[quickchart] POST from: ' + url);
     var options = checkHttpOptions(url, httpOptions);
-    return httpService.post(Quickchart(options), callbackData, callbacks);
+    var response = httpService.post(Quickchart(options), callbackData, callbacks);
+    sys.logs.debug('[quickchart] GET from: ' + response.url);
+    var request = {
+        url: response.url,
+        settings: {
+            forceDownload: true,
+            downloadSync: true
+        }
+    };
+    return httpService.get(request, callbackData, callbacks);
 };
 
 exports.qr.get = function(qrOptions, httpOptions, callbackData, callbacks) {
@@ -222,6 +227,7 @@ var Quickchart = function (options) {
     options = options || {};
     options= setApiUri(options);
     options= setRequestHeaders(options);
+    options= config.get("key") ? setRequestBody(options) : options;
     return options;
 }
 
@@ -230,7 +236,7 @@ var Quickchart = function (options) {
  ****************************************************/
 
 function setApiUri(options) {
-    var API_URL = config.get("QUICKCHART_API_BASE_URL"); // TODO: Set the base url for the api in the package.json (Remove this comment after set the url)
+    var API_URL = config.get("QUICKCHART_API_BASE_URL");
     var url = options.path || "";
     options.url = API_URL + url;
     sys.logs.debug('[quickchart] Set url: ' + options.path + "->" + options.url);
@@ -239,10 +245,6 @@ function setApiUri(options) {
 
 function setRequestHeaders(options) {
     var headers = options.headers || {};
-    if (config.get("authenticationMethod") === "apiKey") { // TODO: Set the authentication method, if needed or remove this if (Remove comments after set the url)
-        sys.logs.debug('[quickchart] Set header apikey');
-        headers = mergeJSON(headers, {"Authorization": "API-Key " + config.get("apiKey")});
-    } 
     headers = mergeJSON(headers, {"Content-Type": "application/json"});
 
     options.headers = headers;
@@ -260,4 +262,11 @@ function mergeJSON (json1, json2) {
         if(json2.hasOwnProperty(key)) result[key] = json2[key];
     }
     return result;
+}
+
+function setRequestBody(options) {
+    var body = options.body || {};
+    body.key = body.key || config.get("key");
+    options.body = body;
+    return options;
 }

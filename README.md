@@ -9,7 +9,7 @@
     <tbody>
     <tr>
         <td>Quickchart package</td>
-        <td>November 17, 2023</td>
+        <td>November 21, 2023</td>
         <td>Detailed description of the API of the Quickchart package.</td>
     </tr>
     </tbody>
@@ -17,14 +17,15 @@
 ---
 title: QuickChart
 keywords: 
-last_updated: March 14, 2023
+last_updated: November 21, 2023
 tags: []
 summary: "Detailed description of QuickChart package."
 ---
 
 # Overview
 
-[QuickChart](https://quickchart.io/) creates embeddable chart and qr images with a single URL. Chart images are defined by [Chart.js](https://www.chartjs.org/) objects. 
+[QuickChart](https://quickchart.io/) creates embeddable chart and qr images with a single URL. Chart images are defined
+by [Chart.js](https://www.chartjs.org/) objects.
 
 The QuickChart package allows to create Chart and QR codes. Some of the features supported by this package are:
 
@@ -34,6 +35,7 @@ The QuickChart package allows to create Chart and QR codes. Some of the features
 ## Configuration
 
 ### Key
+
 It is necessary in case to use QuickChart Pro. It is not required.
 
 ## Javascript API
@@ -62,7 +64,6 @@ Sample:
 You can generate a chart images like this:
 
 ```js
-var record = sys.data.findById('company', '5ab0041fea30451201647e2b');
 pkg.quickchart.api.chart({
         "backgroundColor": "white",
         "width": "500",
@@ -81,21 +82,6 @@ pkg.quickchart.api.chart({
             }]
           }
       }
-  },
-  { record: record }, 
-  {
-    'chartResponse': function(res, callbackData) {
-      var data = res.data;
-      if(data && data.status == "ok") {
-        var document = callbackData.record;
-        document.field('myFileType').val({
-          id: data.file.fileId,
-          name: data.file.fileName,
-          contentType: data.file.contentType
-        });
-        sys.data.save(document);
-      }
-    }
   });
 ```
 
@@ -257,28 +243,12 @@ Sample:
 You can generate a QR code like this:
 
 ```js
-var record = sys.data.findById('company', '5ab0041fea30451201647e2b');
 pkg.quickchart.api.qr({
-    "text": record.field('description').val(),
+    "text": "Any Text",
     "dark": "f23",
     "light": "55f",
     "ecLevel": "Q",
     "size": "300"
-  },
-  { record: record }, 
-  {
-    'qrResponse': function(res, callbackData) {
-      var data = res.data;
-      if(data && data.status == "ok") {
-        var document = callbackData.record;
-        document.field('myFileType').val({
-          id: data.file.fileId,
-          name: data.file.fileName,
-          contentType: data.file.contentType
-        });
-        sys.data.save(document);
-      }
-    }
   });
 ```
 
