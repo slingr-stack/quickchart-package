@@ -33,6 +33,11 @@ It is necessary in case to use QuickChart Pro. It is not required.
 
 ## Javascript API
 
+The Javascript API of the Quickchart package has two pieces:
+
+- **HTTP requests**
+- **Flow steps**
+
 ### Generate chart image
 
 ```js
@@ -221,14 +226,6 @@ pkg.quickchart.api.qr({
   });
 ```
 
-# Javascript API
-
-The Javascript API of the quickchart package has three pieces:
-
-- **HTTP requests**: These allow making regular HTTP requests.
-- **Shortcuts**: These are helpers to make HTTP request to the API in a more convenient way.
-- **Additional Helpers**: These helpers provide additional features that facilitate or improves the package usage in SLINGR.
-
 ## HTTP requests
 You can make `POST`,`GET` requests to the [quickchart API](API_URL_HERE) like this:
 ```javascript
@@ -271,8 +268,6 @@ As an alternative option to using scripts, you can make use of Flows and Flow St
     <summary>Click here to see the Flow Steps</summary>
 
 <br>
-
-
 
 ### Generic Flow Step
 
@@ -574,23 +569,8 @@ Flow Step that provides us with the fields to create a QR code.
 
 </details>
 
-## Additional Helpers
-*MANUALLY ADD THE DOCUMENTATION OF THESE HELPERS HERE...*
-
-## About SLINGR
-
-SLINGR is a low-code rapid application development platform that accelerates development, with robust architecture for integrations and executing custom workflows and automation.
-
-[More info about SLINGR](https://slingr.io)
-
-## License
-
-This package is licensed under the Apache License 2.0. See the `LICENSE` file for more details.
 ## Dependencies
 * HTTP Service (Latest Version)
-
-
-// TODO: Review the dependencies of the package (and remove this comment after set the dependencies)
 
 # About SLINGR
 

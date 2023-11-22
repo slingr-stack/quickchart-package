@@ -53,7 +53,6 @@ step.apiCallQuickchart = function (inputs) {
 		readTimeout: inputsLogic.readTimeout
 	};
 
-
 	switch (inputsLogic.method.toLowerCase()) {
 		case 'get':
 			return httpService.get(Quickchart(options));
@@ -74,33 +73,28 @@ step.apiCallQuickchart = function (inputs) {
 	return null;
 };
 
-var parse = function (url, pathVariables){
-
+function parse (url, pathVariables){
 	var regex = /{([^}]*)}/g;
-
 	if (!url.match(regex)){
 		return url;
 	}
-
 	if(!pathVariables){
 		sys.logs.error('No path variables have been received and the url contains curly brackets\'{}\'');
 		throw new Error('Error please contact support.');
 	}
-
 	url = url.replace(regex, function(m, i) {
 		return pathVariables[i] ? pathVariables[i] : m;
 	})
-
 	return url;
 }
 
-var isObject = function (obj) {
+function isObject (obj) {
 	return !!obj && stringType(obj) === '[object Object]'
-};
+}
 
 var stringType = Function.prototype.call.bind(Object.prototype.toString);
 
-var stringToObject = function (obj) {
+function stringToObject (obj) {
 	if (!!obj){
 		var keyValue = obj.toString().split(',');
 		var parseObj = {};
@@ -110,7 +104,7 @@ var stringToObject = function (obj) {
 		return parseObj;
 	}
 	return null;
-};
+}
 
 var Quickchart = function (options) {
 	options = options || {};
@@ -139,7 +133,6 @@ function setRequestHeaders(options) {
 	options.headers = headers;
 	return options;
 }
-
 
 function mergeJSON (json1, json2) {
 	var result = {};
