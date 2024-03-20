@@ -62,7 +62,7 @@ Sample:
 You can generate a chart images like this:
 
 ```js
-pkg.quickchart.api.chart({
+pkg.quickchart.api.chart.post({
         "backgroundColor": "white",
         "width": "500",
         "height": "300",
@@ -217,7 +217,7 @@ Sample:
 You can generate a QR code like this:
 
 ```js
-pkg.quickchart.api.qr({
+pkg.quickchart.api.qr.get({
     "text": "Any Text",
     "dark": "f23",
     "light": "55f",

@@ -353,14 +353,12 @@ function setRequestBody(options) {
 }
 
 function parse (url, pathVariables){
-    let regex = /{([^}]*)}/g;
-    if (!url.match(regex)){
-        return url;
-    }
     if(!pathVariables){
-        sys.logs.error('No path variables have been received and the url contains curly brackets\'{}\'');
-        throw new Error('Error please contact support.');
+        let regex = /{([^}]*)}/g;
+        if (!url.match(regex)){
+            return url;
+        }
     }
-    url = url+"?"+Object.keys(objeto).map(key => key+"="+pathVariables[key]).join('&');
+    url = url+"?"+Object.keys(pathVariables).map(key => key+"="+pathVariables[key]).join('&');
     return url;
 }
