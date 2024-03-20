@@ -67,7 +67,7 @@ exports.qr.get = function(qrOptions, httpOptions, callbackData, callbacks) {
         sys.logs.error('Invalid argument received. This helper should receive the following parameters as non-empty strings: [qrOptions].');
         return;
     }
-    let url = parse('/qr/:qrOptions', [qrOptions]);
+    let url = parse('/qr', qrOptions);
     sys.logs.debug('[quickchart] GET from: ' + url);
     let options = checkHttpOptions(url, httpOptions);
     return httpService.get(Quickchart(options), callbackData, callbacks);
@@ -361,8 +361,6 @@ function parse (url, pathVariables){
         sys.logs.error('No path variables have been received and the url contains curly brackets\'{}\'');
         throw new Error('Error please contact support.');
     }
-    url = url.replace(regex, function(m, i) {
-        return pathVariables[i] ? pathVariables[i] : m;
-    })
+    url = url+"?"+Object.keys(objeto).map(key => key+"="+pathVariables[key]).join('&');
     return url;
 }
