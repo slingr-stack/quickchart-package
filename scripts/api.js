@@ -70,6 +70,10 @@ exports.qr.get = function(qrOptions, httpOptions, callbackData, callbacks) {
     let url = parse('/qr', qrOptions);
     sys.logs.debug('[quickchart] GET from: ' + url);
     let options = checkHttpOptions(url, httpOptions);
+    options.settings = {
+        forceDownload: true,
+        downloadSync: true
+    };
     return httpService.get(Quickchart(options), callbackData, callbacks);
 };
 
