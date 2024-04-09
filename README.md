@@ -182,7 +182,7 @@ Following example generate a line chart with formatted label in axis y
     config3 += "  }";
     config3 += "}";
     
-    pkg.quickchart.api.chart({
+    pkg.quickchart.api.chart.post({
             "name": "my-chart",
             "backgroundColor": "white",
             "width": "500",
@@ -195,7 +195,7 @@ Following example generate a line chart with formatted label in axis y
 ### Generate QR codes
 
 ```js
-pkg.quickchart.api.qr(qrOptions, callbackData, callbacks);
+pkg.quickchart.api.qr.get(qrOptions, callbackData, callbacks);
 ```
 
 Where:
