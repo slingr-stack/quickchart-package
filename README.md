@@ -62,7 +62,7 @@ Sample:
 You can generate a chart images like this:
 
 ```js
-pkg.quickchart.api.chart({
+pkg.quickchart.api.chart.post({
         "backgroundColor": "white",
         "width": "500",
         "height": "300",
@@ -182,7 +182,7 @@ Following example generate a line chart with formatted label in axis y
     config3 += "  }";
     config3 += "}";
     
-    pkg.quickchart.api.chart({
+    pkg.quickchart.api.chart.post({
             "name": "my-chart",
             "backgroundColor": "white",
             "width": "500",
@@ -195,7 +195,7 @@ Following example generate a line chart with formatted label in axis y
 ### Generate QR codes
 
 ```js
-pkg.quickchart.api.qr(qrOptions, callbackData, callbacks);
+pkg.quickchart.api.qr.get(qrOptions, callbackData, callbacks);
 ```
 
 Where:
@@ -217,7 +217,7 @@ Sample:
 You can generate a QR code like this:
 
 ```js
-pkg.quickchart.api.qr({
+pkg.quickchart.api.qr.get({
     "text": "Any Text",
     "dark": "f23",
     "light": "55f",

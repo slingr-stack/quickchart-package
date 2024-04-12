@@ -73,9 +73,13 @@ exports.qr.get = function(qrOptions, httpOptions, callbackData, callbacks) {
         sys.logs.error('Invalid argument received. This helper should receive the following parameters as non-empty strings: [qrOptions].');
         return;
     }
-    let url = parse('/qr/:qrOptions', [qrOptions]);
+    let url = parse('/qr', qrOptions);
     sys.logs.debug('[quickchart] GET from: ' + url);
     let options = checkHttpOptions(url, httpOptions);
+    options.settings = {
+        forceDownload: true,
+        downloadSync: true
+    };
     return httpService.get(Quickchart(options), callbackData, callbacks);
 };
 
@@ -356,4 +360,15 @@ function setRequestBody(options) {
     body.key = body.key || config.get("key");
     options.body = body;
     return options;
+}
+
+function parse (url, pathVariables){
+    if(!pathVariables){
+        let regex = /{([^}]*)}/g;
+        if (!url.match(regex)){
+            return url;
+        }
+    }
+    url = url+"?"+Object.keys(pathVariables).map(key => key+"="+pathVariables[key]).join('&');
+    return url;
 }
