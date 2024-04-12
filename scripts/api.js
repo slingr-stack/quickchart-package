@@ -59,8 +59,14 @@ exports.chart.post = function(httpOptions, callbackData, callbacks) {
             downloadSync: true
         }
     };
-    return httpService.get(request, callbackData, callbacks);
+    var res = httpService.get(request, callbackData, callbacks);
+    if(res){
+        res.status = "ok"
+    }
+    sys.events.triggerEvent('quickchart:chartResponse', res);
+    return res
 };
+
 
 exports.qr.get = function(qrOptions, httpOptions, callbackData, callbacks) {
     if (!qrOptions) {
