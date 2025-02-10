@@ -1,6 +1,6 @@
 {
     "name": "quickchart",
-    "label": "Quickchart Package",
+    "label": "Quickchart",
     "dependencies": [
         {
             "type": "service",
@@ -19,7 +19,7 @@
         },
         {
             "name": "QUICKCHART_API_BASE_URL",
-            "label": "Quickchart Api Url",
+            "label": "Quickchart API URL",
             "type": "label",
             "value": "https://quickchart.io"
         }
@@ -41,19 +41,9 @@
             "path": "/scripts/api.js"
         },
         {
-            "type": "flowStep",
-            "namespace": "apiCallQuickchart",
-            "path": "/flowSteps/apiCallQuickchart"
-        },
-        {
-            "type": "flowStep",
-            "namespace": "generateChartQuickchart",
-            "path": "/flowSteps/generateChartQuickchart"
-        },
-        {
-            "type": "flowStep",
-            "namespace": "generateQRQuickchart",
-            "path": "/flowSteps/generateQRQuickchart"
+            "type": "script",
+            "namespace": "utils",
+            "path": "/scripts/utils.js"
         }
     ]
 }
