@@ -1,19 +1,19 @@
 # Overview
 Repo: [https://github.com/slingr-stack/quickchart-package](https://github.com/slingr-stack/quickchart-package)
 
-[QuickChart](https://quickchart.io/) creates embeddable chart and qr images with a single URL. Chart images are defined
+[QuickChart](https://quickchart.io/) creates embeddable chart and QR images with a single URL. Chart images are defined
 by [Chart.js](https://www.chartjs.org/) objects.
 
-The QuickChart package allows to create Chart and QR codes. Some of the features supported by this package are:
+The QuickChart [package](https://platform-docs.slingr.io/dev-reference/data-model-and-logic/packages/) allows creating Chart and QR codes. Some of the features supported by this package are:
 
-- Generate an image (PNG or PDF) with the Chart
-- Generate an image (PNG or SVG) with the QR codes
+- Generate an image (PNG or PDF) with a chart
+- Generate an image (PNG or SVG) with a QR code
 
 ## Configuration
 
-### Key
+#### Key
 
-It is necessary in case to use QuickChart Pro.
+It is necessary if you want to use QuickChart Pro.
 
 **Name**: `key`
 **Type**: text
@@ -21,7 +21,7 @@ It is necessary in case to use QuickChart Pro.
 
 #### Quickchart API URL
 
-The URL of the Quickchart API where the requests are performed.
+The URL of the Quickchart API The URL of the QuickChart API where requests are sent.
 
 **Name**: `QUICKCHART_API_BASE_URL`
 **Type**: label
@@ -51,9 +51,9 @@ Where:
 - `callbackData`: information that will be passed to the callbacks in the second parameter.
 - `callbacks`: a map with the callback `chartResponse` to receive the file with the Chart.
 
-Sample:
+Example:
 
-You can generate a chart images like this:
+You can generate a chart image like this:
 
 ```js
 pkg.quickchart.api.chart.post({
@@ -80,7 +80,7 @@ pkg.quickchart.api.chart.post({
 > Note that if you want to include Javascript code in chart (e.g. to format labels), you'll have to send the entire 
 > chart parameter as a string rather than a JSON object. 
 
-Following example generate a line chart with formatted label in axis y 
+The following example generates a line chart with a formatted label on the Y-axis.
 
 ```js
     var MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -194,14 +194,14 @@ pkg.quickchart.api.qr.get(qrOptions, callbackData, callbacks);
 
 Where:
 
-- `qrOptions`: a map with the following options:
-  - `name`: this is the image file name. If it is null the default is `qr-{uuid}`.
-  - `text`: text to convert to QR code (required).
-  - `margin`: specify the whitespace around QR image (optional). By default `4`.
-  - `size`: in pixels of the square QR image (optional). By default `150`.
+- `qrOptions`: A map with the following options:
+  - `name`: This is the image file name. If it is null, the default is `qr-{uuid}`.
+  - `text`: The text to convert to QR code (required).
+  - `margin`: Specifies the whitespace around the QR image (optional). By default `4`.
+  - `size`: Size of the square QR image in pixels. By default `150`.
   - `ecLevel`: error correction level (valid values: L, M, Q, H) (optional). By default `M`.
-  - `dark`: QR color (optional). By default `000`.
-  - `light`: background color (optional). By default `fff`.
+  - `dark`: QR color (optional). The default is `000`.
+  - `light`: background color (optional). The default is `fff`.
   - `format`: format of your output. Currently the two supported output formats are PNG and SVG (optional). By default `png`.
 - `callbackData`: information that will be passed to the callbacks in the second parameter.
 - `callbacks`: a map with the callback `qrResponse` to receive the file with the QR.
@@ -228,31 +228,8 @@ var response = pkg.quickchart.api.post('/chart/:chartOptions')
 var response = pkg.quickchart.api.get('/qr/:qrOptions')
 ```
 
-Please take a look at the documentation of the [HTTP service](https://github.com/slingr-stack/http-service)
+Please refer to the [HTTP service](https://github.com/slingr-stack/http-service) documentation for more information about generic requests.
 for more information about generic requests.
-
-## Shortcuts
-
-Instead of having to use the generic HTTP methods, you can (and should) make use of the helpers provided in the package:
-<details>
-    <summary>Click here to see all the helpers</summary>
-
-<br>
-
-* API URL: '/chart/:chartOptions'
-* HTTP Method: 'POST'
-```javascript
-pkg.quickchart.api.chart.post(chartOptions, body, callbackData, callbacks)
-```
----
-* API URL: '/qr/:qrOptions'
-* HTTP Method: 'GET'
-```javascript
-pkg.quickchart.api.qr.get(qrOptions, callbackData, callbacks)
-```
----
-
-</details>
 
 ## Dependencies
 * HTTP Service

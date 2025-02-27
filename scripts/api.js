@@ -51,7 +51,7 @@ exports.chart.post = function(httpOptions, callbackData, callbacks) {
         }
     };
     var res = httpService.get(request, callbackData, callbacks);
-    if(res){
+    if (res) {
         res.status = "ok";
     }
     sys.events.triggerEvent('quickchart:chartResponse', res);
