@@ -35,7 +35,7 @@ The Javascript API of the Quickchart package has two pieces:
 ### Generate chart image
 
 ```js
-pkg.quickchart.api.chart(chartOptions, callbackData, callbacks);
+pkg.quickchart.api.chart.post(chartOptions, callbackData, callbacks);
 ```
 
 Where:
@@ -49,7 +49,7 @@ Where:
   - `format`: format of your output. Currently the two supported output formats are PNG and PDF (optional). By default `png`.
   - `devicePixelRatio`: device pixel ratio of the output (defaults to retina=2.0). Note that width and height are multiplied by this value. (optional)
 - `callbackData`: information that will be passed to the callbacks in the second parameter.
-- `callbacks`: a map with the callback `chartResponse` to receive the file with the Chart.
+- `callbacks`: a map with the callback `callback` to receive the file with the Chart.
 
 Example:
 

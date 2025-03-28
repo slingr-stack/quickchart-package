@@ -41,7 +41,7 @@ exports.chart.post = function(httpOptions, callbackData, callbacks) {
     let url = parse('/chart/create');
     sys.logs.debug('[quickchart] POST from: ' + url);
     let options = checkHttpOptions(url, httpOptions);
-    let response = httpService.post(Quickchart(options), callbackData, callbacks);
+    let response = httpService.post(Quickchart(options));
     sys.logs.debug('[quickchart] GET from: ' + response.url);
     let request = {
         url: response.url,
